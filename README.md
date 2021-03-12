@@ -32,10 +32,14 @@ You can view these outputs again by running:
 $ terraform output
 ```
 
+### Deploy custom configmap auth
 
-## Deploy and access Kubernetes Dashboard
+```shell
+kubectl apply -f kube2iam/serviceaccount.yaml
+kubectl apply -f kube2iam/clusterrole.yaml
+kubectl apply -f kube2iam/daemonset.yaml
+```
 
-To verify that your cluster is configured correctly and running, you will install a Kubernetes dashboard and navigate to it in your local browser. 
 
 ### Deploy Kubernetes Metrics Server
 
@@ -59,5 +63,6 @@ kubectl apply -f kube2iam/daemonset.yaml
 
 ### Deploy autoscaler
 ```
-helm install cluster-autoscaler --namespace kube-system autoscaler/cluster-autoscaler-chart --values=cluster-autoscaler-chart-values.yaml
+helm install cluster-autoscaler --namespace kube-system autoscaler/cluster-autoscaler-chart --values=misc/cluster-autoscaler-chart-values.yaml
 ```
+More info on [scaling down](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-down-work)
